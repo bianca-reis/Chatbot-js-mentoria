@@ -1,0 +1,25 @@
+<svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Gradiente de fundo -->
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#3b6edc"></stop>
+      <stop offset="100%" stop-color="#0b1f4d"></stop>
+    </radialGradient>
+  </defs>
+
+  <!-- Círculo fundo -->
+  <circle cx="60" cy="60" r="55" fill="url(#bg)"></circle>
+
+  <!-- Círculo borda -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#6ea0ff" stroke-width="2" opacity="0.6"></circle>
+
+  <!-- Cabeça -->
+  <circle cx="60" cy="48" r="16" fill="#ffffff"></circle>
+
+  <!-- Ombros -->
+  <path d="M30 95
+           C35 75, 85 75, 90 95
+           Z" fill="#ffffff"></path>
+
+</svg>

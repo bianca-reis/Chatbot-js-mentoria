@@ -1,0 +1,5 @@
+# Config local - não commitar credenciais
+config.local.js
+.env
+.env.local
+.env*.local
