@@ -384,16 +384,19 @@ function sendReportToPersonal() {
       clientName,
       date: new Date().toLocaleDateString("pt-BR")
     })
-  }).then(r => {
+  }).then(async r => {
+    const data = await r.json().catch(() => ({}))
     if (r.ok) {
       btn.textContent = "Relatório enviado!"
       const hint = document.getElementById("conclusionHint")
       if (hint) hint.textContent = "Sua personal receberá o relatório por e-mail em instantes."
-    } else throw new Error()
-  }).catch(() => {
+    } else {
+      throw new Error(data.error || "Erro " + r.status)
+    }
+  }).catch((err) => {
     btn.disabled = false
     btn.textContent = "Enviar relatório para minha personal"
-    alert("Não foi possível enviar. Verifique se o app está no Vercel com as variáveis configuradas.")
+    alert("Não foi possível enviar: " + (err.message || "erro desconhecido"))
   })
 }
 

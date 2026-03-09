@@ -11,7 +11,12 @@ export default async function handler(req, res) {
   const templateId = process.env.EMAILJS_TEMPLATE_ID
   const toEmail = process.env.EMAILJS_TO_EMAIL
   if (!publicKey || !serviceId || !templateId || !toEmail) {
-    return res.status(500).json({ error: "Email not configured" })
+    const missing = []
+    if (!publicKey) missing.push("EMAILJS_PUBLIC_KEY")
+    if (!serviceId) missing.push("EMAILJS_SERVICE_ID")
+    if (!templateId) missing.push("EMAILJS_TEMPLATE_ID")
+    if (!toEmail) missing.push("EMAILJS_TO_EMAIL")
+    return res.status(500).json({ error: "Variáveis faltando: " + missing.join(", ") })
   }
   try {
     const r = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
@@ -35,6 +40,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ ok: true })
   } catch (err) {
     console.error(err)
-    return res.status(500).json({ error: "Failed to send email" })
+    return res.status(500).json({ error: err.message || "Failed to send email" })
   }
 }
